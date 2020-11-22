@@ -3,6 +3,13 @@
 }
 .btn-outline-primary:hover {
     background-color: transparent;
+    color: #007bff;
+}
+.btn:focus {
+    box-shadow: none;
+}
+.btn-outline-primary:focus {
+    box-shadow: none;
 }
 iframe {
     height: -webkit-fill-available;
