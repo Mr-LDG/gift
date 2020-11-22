@@ -1,6 +1,9 @@
 .clickable {
     cursor: pointer;
 }
-button {
-    pointer-events: none;
+.btn-outline-primary:hover {
+    background-color: transparent;
+}
+iframe {
+    height: -webkit-fill-available;
 }
