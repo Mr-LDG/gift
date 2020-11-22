@@ -2,7 +2,7 @@ var app = new Vue({
     el: '#app',
     data: {
         index: 0,
-        showVideo: true,
+        showVideo: false,
         question: [
             "상희 남자친구 이름은?",
             "동근이랑 상희랑 처음 사귄 날짜는?",
