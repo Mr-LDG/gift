@@ -3,102 +3,79 @@ var app = new Vue({
     data: {
         index: 0,
         showVideo: false,
-        question: [
-            "상희 남자친구 이름은?",
-            "동근이랑 상희랑 처음 사귄 날짜는?",
-            "오늘은 동상커플의 특별한 날입니다! 무슨 날일까요?",
-            "다음 중 동상커플이 해본 데이트가 아닌 것은?",
-            "동상 다이어리의 첫번째 시리즈 이름은?",
-            "동상 커플이 주고받지 않은 선물은 무엇인가요?",
-            "요즘 동근이가 실천하고 있는 1일 1운동은?",
-            "다음 중 상희의 동근어록에 없는 말은?",
-            "다음 중 상희가 추천한 곡이 아닌 것은?",
-            "동근이가 상희를 위해 작곡한 노래 제목은?"
+        keyword: '',
+        keywordList: [
+            "보이는라디오",
+            "통화후에",
+            "선물의시작",
+            "컨디션안좋은날",
+            "사무실에서",
+            "출근길에서",
+            "광주에서",
+            "포항에서",
+            "아쉬운날",
+            "니가생각나",
+            "100일기념"
         ],
-        examples: [
-            [
-                "남도산",
-                "한지평",
-                "이동근",
-                "무빙머슬"
-            ],
-            [
-                "7월 26일",
-                "8월 8일",
-                "8월 15일",
-                "8월 16일"
-            ],
-            [
-                "손 처음으로 잡은 날!",
-                "100일!",
-                "처음으로 뽀뽀한 날!",
-                "처음으로 사랑한다고 말한 날!"
-            ],
-            [
-                "같이 예배드리기",
-                "자전거 라이딩",
-                "등산하기",
-                "같이 일출구경"
-            ],
-            [
-                "좋아요 시리즈",
-                "부탁해요 시리즈",
-                "칭찬해요 시리즈",
-                "사랑해요 시리즈"
-            ],
-            [
-                "꽃다발",
-                "직접 짠 목도리",
-                "커플옷",
-                "빼빼로"
-            ],
-            [
-                "사랑한다고 말하기",
-                "뽀뽀하기",
-                "종이학접기",
-                "사진찍기"
-            ],
-            [
-                "배가 그렇게 되도 여전히 상희고 귀여울텐데",
-                "난 너밖에 없어",
-                "내가 열 많으니까 상희 나눠주면 되지",
-                "난 이 마음을 표출 안하면 큰일날 것 같은데"
-            ],
-            [
-                "사랑이란-김도현",
-                "달콤한 여름밤-디에이드",
-                "좋아하는 것 같아-파니니 브런치",
-                "밤하늘의 별을-경서"
-            ],
-            [
-                "너를 사랑해",
-                "너만 보여",
-                "니가 생각나",
-                "네가 참 좋아"
-            ]
-        ],
-        answerList:[3,4,2,4,1,3,1,2,4,3]
+        urlList: [
+            "u_mXnkhOQhQ",
+            "N4Veq6zg1M0",
+            "lA0I4nr7lpI",
+            "JRrfiQW193I",
+            "0_dhVBA1o0s",
+            "rPX01rC91lU",
+            "FiK49Vr_b-s",
+            "83tAsoHQFd4",
+            "8oocBTP2uR4",
+            "F-AheCHlz1o",
+            "mY56r_fGntw"
+        ]   
     },
     methods: {
-        goBack: function() {
-            if(this.isNum(this.index)) this.index--;
+        checkKeyword: function() {
+            var _index = this.keywordList.findIndex(keywordUnit => {
+                return keywordUnit == this.keyword;
+            })
+            this.setVideo(_index);
         },
-        isNum: function(index) {
-            return index > 0;
-        },
-        isRight: function(answerNum) {
-            if(this.answerList[this.index] == answerNum) {
-                this.isEnd();
-            } else {
-                alert("상희 틀려또...? 다시 해보세용♥");
+        setVideo: function(index){
+            if(index === -1) {
+                alert("키워드가 틀렸어용 ㅠ");
+                return;
             }
+            this.playVideo(index);
         },
-        isEnd: function() {
-            if(this.index >= this.answerList.length-1) {
-                this.showVideo = true;
-            } else {
-                this.index++;
-            }
+        playVideo: function(index) {
+            this.showVideo = true;
+            srcUrl = this.urlList[index];
+            tag.src = "https://www.youtube.com/iframe_api";
         }
     }
-  })
+})
+
+
+// YOUTUBE API
+var tag = document.createElement('script');
+
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+// 3. This function creates an <iframe> (and YouTube player)
+//    after the API code downloads.
+var player;
+var srcUrl;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+    height: '100%',
+    width: '100%',
+    videoId: srcUrl,
+    events: {
+        'onReady': onPlayerReady
+    }
+    });
+}
+
+// 4. The API will call this function when the video player is ready.
+function onPlayerReady(event) {
+    event.target.playVideo();
+}

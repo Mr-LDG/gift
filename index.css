@@ -1,16 +1,42 @@
 .clickable {
     cursor: pointer;
 }
-.btn-outline-primary:hover {
+.btn-outline-warning:hover {
     background-color: transparent;
     color: #007bff;
 }
 .btn:focus {
     box-shadow: none;
 }
-.btn-outline-primary:focus {
+.btn-outline-warning:focus {
     box-shadow: none;
 }
 iframe {
     height: -webkit-fill-available;
+}
+body { 
+    padding: 0px; 
+    margin: 0px;
+    background-image: url('하트배경.jpg');
+}
+.jb-box { 
+    width: 100vw; 
+    height: 100vh; 
+    overflow: hidden;
+    margin: 0px auto; 
+    position: relative; 
+    text-align: center;
+}
+video { 
+    width: 100%; 
+    height: 100%;
+}
+.jb-text { 
+    position: absolute; 
+    top: 25%; 
+    width: 100%; 
+}
+#player {
+    width: 100vw;
+    height: 100vh;
 }
